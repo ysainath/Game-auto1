@@ -87,7 +87,7 @@ public class GameHelper {
 
 	private void playGame(boolean newProfile) {
 		try (final Scanner in = new Scanner(System.in)) {
-			while (true) {
+			loop :while (true) {
 				String playerName = null, password = null;
 				boolean isNotEmpty = false;
 				while (!isNotEmpty) {

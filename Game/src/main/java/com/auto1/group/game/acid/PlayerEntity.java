@@ -72,10 +72,10 @@ public class PlayerEntity implements Serializable {
 	@LastModifiedDate
 	private Long modifiedDate;
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "playerEntity")
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "playerEntity", orphanRemoval = true)
 	private List<GameZoneEntity> gameZones = new ArrayList<>();
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "playerEntity")
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "playerEntity", orphanRemoval = true)
 	private List<ItemEntity> items = new ArrayList<>();
 
 	public Long getId() {
@@ -177,6 +177,14 @@ public class PlayerEntity implements Serializable {
 		entity.setZoneName(zoneName);
 		entity.setVisitedCount(visitedCount);
 		entity.setPlayerEntity(playerEntity);
+		this.gameZones.add(entity);
+
+	}
+
+	public void addZoneEntity(GameZoneEntity entity) {
+		if (this.gameZones == null) {
+			gameZones = new ArrayList<>();
+		}
 		this.gameZones.add(entity);
 
 	}
