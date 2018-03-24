@@ -1,66 +1,46 @@
 # Project Title
 
-This project is sample command line based application which allows to play multiple games
+Game repo link : https://github.com/ysainath/Game-auto1/tree/master/Game
+
+This project is command line based application which allows users to play multiple games.
+User can create a character or sign in with already registered character.
+User can take a fighting challenge and explore the game to collect the items.
+
+### Prerequisites
+
+1. Eclipse IDE with java 8 compatible
+2. MySql installed in your local and should be running on port 3306
+3. Maven installed
 
 ## Getting Started
 
 Checkout this project to your local repo and build the application
 
-### To Build the application
+### To Run the application from command line
  
-mvn clean install
+mvn spring-boot:run
 
-### Prerequisites
+### To Run the application from eclipse
 
-1. Eclipse IDE with java 8 compatible
-2. MySql installed in your local
+1. Import code into local eclipse
+2. Run GameApplication.java 
 
-### Installing
+### Demo 
 
-1. Import
+   #### Welcome to Multi Player Game ###
 
-```
-Give the example
-```
+  Select below options to proceed.
+   1.Create a character.
+   2.Do you already know your registered Character details?
 
-And repeat
-
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo
-
-## Running the tests
-
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-## Deployment
-
-Add additional notes about how to deploy this on a live system
+  ...........
 
 ## Built With
 
-* [Spring boot - 1.5.10 RELEASE](https://docs.spring.io/spring-boot/docs/) - The Spring Boot web framework
-* [Maven](https://maven.apache.org/) - Dependency Management
-
-(https://github.com/your/project/tags). 
+* [Spring boot - 1.5.10 RELEASE](https://docs.spring.io/spring-boot/docs/) - The Spring Boot framework
+* [Maven](https://maven.apache.org/) - Dependency Management 
+* [MySql](https://dev.mysql.com/doc/) - Database
+* project tags https://github.com/ysainath/Game-auto1/tree/master/Game
 
 ## Authors
 
