@@ -1,37 +1,38 @@
 # Project Title
 
-This project is sample command line based application which allows to play multiple games.
+This project is sample command line based application which allows users to play multiple games.
+User can create a character or sign in with already registered character.
 User can take a fighting challenge and explore the game to collect the items.
 
+### Prerequisites
+
+1. Eclipse IDE with java 8 compatible
+2. MySql installed in your local and should be running on port 3306
+3. Maven installed
 
 ## Getting Started
 
 Checkout this project to your local repo and build the application
 
-### To Build the application from command line
+
+### To Run the application from command line
  
-mvn clean package
+mvn spring-boot:run
 
-### Prerequisites
-
-1. Eclipse IDE with java 8 compatible
-2. MySql installed in your local
-3. Maven
-
-### Installing and Running
+### To Run the application from eclipse
 
 1. Import code into local eclipse
 2. Run GameApplication.java 
 
 ### Demo 
 
-Welcome to Multi Player Game
+   #### Welcome to Multi Player Game ###
 
-Select below options to proceed.
-1.Create a character.
-2.Do you already know your registered Character details?
+  Select below options to proceed.
+   1.Create a character.
+   2.Do you already know your registered Character details?
 
-...........
+  ...........
 
 ## Built With
 
