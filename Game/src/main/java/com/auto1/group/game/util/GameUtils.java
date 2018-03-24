@@ -16,7 +16,7 @@ import com.auto1.group.game.model.actors.GameZone;
 import com.auto1.group.game.model.actors.Player;
 
 /**
- * @author yelsa03
+ * This class serves as utility for Game operations
  *
  */
 public class GameUtils {
@@ -40,6 +40,11 @@ public class GameUtils {
 		System.out.println("--------------------------");
 	}
 
+	/**
+	 * Create levels of static data
+	 * 
+	 * @return
+	 */
 	public static List<GameLevel> createLevels() {
 		List<GameLevel> levels = new ArrayList<>();
 		for (int i = 1; i <= MAX_LEVEL; i++) {
@@ -56,6 +61,11 @@ public class GameUtils {
 		return levels;
 	}
 
+	/**
+	 * creates zones of statuc data
+	 * 
+	 * @return
+	 */
 	public static List<GameZone> createZones() {
 
 		List<GameZone> zones = new ArrayList<>();
@@ -68,6 +78,12 @@ public class GameUtils {
 		return zones;
 	}
 
+	/**
+	 * transforms entity to player
+	 * 
+	 * @param entity
+	 * @return
+	 */
 	public static Player transformToPlayer(PlayerEntity entity) {
 
 		Player player = new Player();
@@ -89,7 +105,14 @@ public class GameUtils {
 		return player;
 	}
 
-	public static PlayerEntity transformToPlayerEntity(Player player) {
+	/**
+	 * transforms player to player entity
+	 * 
+	 * @param player
+	 * @param oldEntity
+	 * @return
+	 */
+	public static PlayerEntity transformToPlayerEntity(Player player, PlayerEntity oldEntity) {
 
 		PlayerEntity playerEntity = new PlayerEntity();
 		playerEntity.setId(player.getPlayerId());
@@ -98,14 +121,34 @@ public class GameUtils {
 		playerEntity.setHealth(player.getHealth());
 		playerEntity.setHealthBottles(player.getHealthBottles());
 		if (player.getItems() != null) {
-			for (String itemName : player.getItems().keySet()) {
-				playerEntity.addItemEntity(itemName, player.getItems().get(itemName), playerEntity);
+			if (oldEntity != null) {
+				for (ItemEntity entity : oldEntity.getItems()) {
+					entity.setPlayerEntity(playerEntity);
+					entity.setItemCount(player.getItems().get(entity.getItemName()));
+				}
+				playerEntity.setItems(oldEntity.getItems());
+			} else {
+				for (String itemName : player.getItems().keySet()) {
+					playerEntity.addItemEntity(itemName, player.getItems().get(itemName), playerEntity);
+				}
 			}
 		}
 
 		if (player.getZones() != null) {
-			for (String zoneName : player.getZones().keySet()) {
-				playerEntity.addZoneEntity(zoneName, player.getZones().get(zoneName), playerEntity);
+			if (oldEntity != null && !oldEntity.getGameZones().isEmpty()) {
+				for (GameZoneEntity entity : oldEntity.getGameZones()) {
+					entity.setPlayerEntity(playerEntity);
+					entity.setVisitedCount(player.getZones().get(entity.getZoneName()));
+				}
+				for (String zoneName : player.getZones().keySet()) {
+					playerEntity.addZoneEntity(zoneName, player.getZones().get(zoneName), playerEntity);
+				}
+
+				playerEntity.setGameZones(oldEntity.getGameZones());
+			} else {
+				for (String zoneName : player.getZones().keySet()) {
+					playerEntity.addZoneEntity(zoneName, player.getZones().get(zoneName), playerEntity);
+				}
 			}
 		}
 

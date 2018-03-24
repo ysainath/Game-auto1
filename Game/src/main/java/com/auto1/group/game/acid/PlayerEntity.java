@@ -20,13 +20,13 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 /**
- * @author yelsa03
- *
+ * @author yelsa03 This class is JPA Entity representation to Db
  */
 @Entity
 @Table(name = "PLAYER")
@@ -179,6 +179,11 @@ public class PlayerEntity implements Serializable {
 		entity.setPlayerEntity(playerEntity);
 		this.gameZones.add(entity);
 
+	}
+
+	@Override
+	public String toString() {
+		return new ToStringBuilder(this).toString();
 	}
 
 }

@@ -1,4 +1,4 @@
-package com.auto1.group.Game;
+package com.auto1.group.game;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

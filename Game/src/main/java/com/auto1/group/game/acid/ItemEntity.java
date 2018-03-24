@@ -15,7 +15,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 /**
+ * This class is JPA Entity representation to Db
+ * 
  * @author yelsa03
  *
  */
@@ -23,9 +27,6 @@ import javax.persistence.Table;
 @Table(name = "ITEM")
 public class ItemEntity implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 2838609614806337087L;
 
 	@Id
@@ -74,4 +75,8 @@ public class ItemEntity implements Serializable {
 		this.itemCount = itemCount;
 	}
 
+	@Override
+	public String toString() {
+		return new ToStringBuilder(this).toString();
+	}
 }

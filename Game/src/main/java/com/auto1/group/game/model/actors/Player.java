@@ -9,19 +9,43 @@ import java.util.Map;
 import com.auto1.group.game.util.GameUtils;
 
 /**
- * @author yelsa03
+ * This class is Player extending the Base Actor class
  *
  */
 public class Player extends Actor {
 
+	/**
+	 * Player id
+	 */
 	private Long playerId;
+	/**
+	 * No of health bottles
+	 */
 	private Integer healthBottles = 0;
+	/**
+	 * Score
+	 */
 	private Integer score = 0;
+	/**
+	 * Current level of player
+	 */
 	private Integer currentLevel = 0;
+	/**
+	 * Game name associated to player
+	 */
 	private String gameName;
+	/**
+	 * Items at which player has
+	 */
 	private Map<String, Integer> items;
+	/**
+	 * password for a specific character
+	 */
 	private String password;
 
+	/**
+	 * game zones and visited status
+	 */
 	private Map<String, Integer> zones;
 
 	public Player(final String name, final int health, final int damage) {
@@ -75,6 +99,9 @@ public class Player extends Actor {
 		this.gameName = gameName;
 	}
 
+	/**
+	 * Verifies if player has enough health bottles and weapons
+	 */
 	public void customBottles() {
 		if (hasHealthBottles()) {
 			if (!hasWeapons()) {

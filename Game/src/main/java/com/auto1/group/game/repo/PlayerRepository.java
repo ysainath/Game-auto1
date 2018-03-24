@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.auto1.group.game.acid.PlayerEntity;
 
 /**
- * @author yelsa03
+ * This is JPA repository to perform CRUD opertaions for Player
  *
  */
 

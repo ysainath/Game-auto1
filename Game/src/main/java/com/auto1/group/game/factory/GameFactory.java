@@ -4,7 +4,6 @@
 package com.auto1.group.game.factory;
 
 import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Service;
@@ -16,17 +15,24 @@ import com.auto1.group.game.model.actors.Player;
 import com.auto1.group.game.util.GameUtils;
 
 /**
+ * This class follows Factory patterns to produce objects
+ * 
  * @author yelsa03
  *
  */
 @Service
 public class GameFactory implements ApplicationContextAware {
 
-
 	private ApplicationContext context;
 	public static final String AVATAR_GAME_NAME = "Avatar";
 	public static final String HARRY_GAME_NAME = "Harry Potter";
 
+	/**
+	 * This method accepts player and constructs game of specific type
+	 * 
+	 * @param player
+	 * @return
+	 */
 	public Game getGame(Player player) {
 
 		if (GameUtils.AVATAR.equals(player.getGameName())) {
@@ -44,6 +50,9 @@ public class GameFactory implements ApplicationContextAware {
 
 	}
 
+	/**
+	 * Injects Application context
+	 */
 	@Override
 	public void setApplicationContext(ApplicationContext context) throws BeansException {
 		this.context = context;

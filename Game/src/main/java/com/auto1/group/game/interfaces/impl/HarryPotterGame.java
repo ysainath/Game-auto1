@@ -11,6 +11,9 @@ import org.springframework.stereotype.Component;
 import com.auto1.group.game.interfaces.AbstractGame;
 
 /**
+ * This is implementation of Abstract Game .This class is lazily loaded based
+ * on @Lazy annotation
+ * 
  * @author yelsa03
  *
  */

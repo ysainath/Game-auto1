@@ -4,7 +4,7 @@
 package com.auto1.group.game.model.actors;
 
 /**
- * @author yelsa03
+ * This Class extends Actor and acts as Enemy entity
  *
  */
 public class Enemy extends Actor {

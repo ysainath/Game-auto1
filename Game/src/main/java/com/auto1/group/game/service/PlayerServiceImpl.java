@@ -3,6 +3,9 @@
  */
 package com.auto1.group.game.service;
 
+import java.util.ArrayList;
+import java.util.Objects;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
@@ -14,7 +17,7 @@ import com.auto1.group.game.repo.PlayerRepository;
 import com.auto1.group.game.util.GameUtils;
 
 /**
- * @author yelsa03
+ * This is implementation class for @link {PersonService}
  *
  */
 @Service
@@ -24,6 +27,9 @@ public class PlayerServiceImpl implements PlayerService {
 	@Autowired
 	private PlayerRepository playerRepo;
 
+	/**
+	 * Fetches player for playerName
+	 */
 	@Transactional(readOnly = true)
 	public Player findPlayerByName(String playerName) {
 
@@ -38,6 +44,9 @@ public class PlayerServiceImpl implements PlayerService {
 		return player;
 	}
 
+	/**
+	 * Fetches player for player name and game name
+	 */
 	@Transactional(readOnly = true)
 	public Player findByPlayerAndGameName(Player player) {
 		PlayerEntity playerEntity = findPlayerEntity(player);
@@ -48,25 +57,24 @@ public class PlayerServiceImpl implements PlayerService {
 		return transformed;
 	}
 
+	/**
+	 * This method saves or updates palyer to db
+	 */
 	public void save(Player p) {
 		if (p != null) {
 
 			PlayerEntity playerEntity = findPlayerEntity(p);
 			if (playerEntity == null) {
-				playerRepo.save(GameUtils.transformToPlayerEntity(p));
+				playerRepo.save(GameUtils.transformToPlayerEntity(p, null));
 			} else {
 				p.setPlayerId(playerEntity.getId());
-				playerRepo.save(GameUtils.transformToPlayerEntity(p));
+				playerRepo.save(GameUtils.transformToPlayerEntity(p, playerEntity));
 			}
 
 		}
 
 	}
 
-	/**
-	 * @param p
-	 * @return
-	 */
 	private PlayerEntity findPlayerEntity(Player p) {
 		PlayerEntity playerEntity = new PlayerEntity();
 		playerEntity.setName(p.getName());
@@ -76,6 +84,9 @@ public class PlayerServiceImpl implements PlayerService {
 		return playerEntity;
 	}
 
+	/**
+	 * Deletes the player entity
+	 */
 	public void delete(Player p) {
 		PlayerEntity playerEntity = findPlayerEntity(p);
 		if (playerEntity != null) {

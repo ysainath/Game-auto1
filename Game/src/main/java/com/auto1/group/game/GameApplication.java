@@ -14,6 +14,12 @@ import com.auto1.group.game.service.GameHelper;
 @EnableTransactionManagement
 @EnableJpaRepositories
 @EnableJpaAuditing
+/**
+ * This class is Spring Boot Application for Playing
+ * 
+ * @author yelsa03
+ *
+ */
 public class GameApplication implements CommandLineRunner {
 
 	@Autowired

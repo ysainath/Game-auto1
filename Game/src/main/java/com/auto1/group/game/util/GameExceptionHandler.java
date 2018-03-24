@@ -4,7 +4,7 @@
 package com.auto1.group.game.util;
 
 /**
- * @author yelsa03
+ * Exception handler for Game application
  *
  */
 public class GameExceptionHandler {

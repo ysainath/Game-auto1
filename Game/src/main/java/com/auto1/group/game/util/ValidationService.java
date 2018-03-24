@@ -10,7 +10,7 @@ import com.auto1.group.game.model.actors.Player;
 import com.auto1.group.game.service.PlayerService;
 
 /**
- * @author yelsa03
+ * This class is responsible for validation performed across game operations
  *
  */
 @Service
@@ -19,11 +19,23 @@ public class ValidationService {
 	@Autowired
 	private PlayerService playerService;
 
+	/**
+	 * verifies character is unique or not
+	 * 
+	 * @param player
+	 * @return
+	 */
 	public boolean verifyNameAlreadyRegistered(Player player) {
 
 		return playerService.findPlayerByName(player.getName()) == null;
 	}
 
+	/**
+	 * authenticates player
+	 * 
+	 * @param player
+	 * @return
+	 */
 	public boolean authenticate(Player player) {
 
 		Player dbPlayer = playerService.findByPlayerAndGameName(player);

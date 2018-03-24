@@ -17,7 +17,10 @@ import com.auto1.group.game.util.GameUtils;
 import com.auto1.group.game.util.ValidationService;
 
 /**
- * @author yelsa03
+ * This acts as helper class for Game operations Performs authentication of a
+ * player Validates uniqueness if character creation
+ * 
+ * Follows proxy pattern for all game operations
  *
  */
 @Service
@@ -29,16 +32,31 @@ public class GameHelper {
 	@Autowired
 	private ValidationService validationService;
 
+	/**
+	 * authenticates if player is allowed
+	 * 
+	 * @param player
+	 * @return
+	 */
 	public boolean authenticate(Player player) {
 		System.out.println("### Authenticating your profile...###");
 		return validationService.authenticate(player);
 	}
 
+	/**
+	 * validates uniquenesss of character
+	 * 
+	 * @param player
+	 * @return
+	 */
 	public boolean validateUniqueness(Player player) {
 		System.out.println("### Verifiying uniqueness of your character name...###");
 		return validationService.verifyNameAlreadyRegistered(player);
 	}
 
+	/**
+	 * Entry point of game and runs continuously unless the player dies
+	 */
 	public void run() {
 		try (final Scanner in = new Scanner(System.in)) {
 			System.out.println("#####  Welcome to Multi Player Game ##########");

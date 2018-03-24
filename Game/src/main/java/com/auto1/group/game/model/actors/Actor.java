@@ -6,7 +6,8 @@ package com.auto1.group.game.model.actors;
 import java.util.Random;
 
 /**
- * @author yelsa03
+ * This class is Base Object for Actor used in Game 
+ * 
  *
  */
 public class Actor {

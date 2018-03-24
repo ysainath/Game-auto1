@@ -6,7 +6,7 @@ package com.auto1.group.game.model.actors;
 import java.util.List;
 
 /**
- * @author yelsa03
+ * This class holds the game level and can be created by Game implementations
  *
  */
 public class GameLevel {

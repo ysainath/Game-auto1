@@ -19,18 +19,36 @@ import com.auto1.group.game.service.PlayerService;
 import com.auto1.group.game.util.GameUtils;
 
 /**
+ * This is abstract class which handles the game interfaces All the
+ * implementations can use the abstract logic or override it
+ * 
  * @author yelsa03
  *
  */
 public abstract class AbstractGame implements Game {
 
+	/**
+	 * Game name string
+	 */
 	private String gameName;
+	/**
+	 * Player object injected to this class
+	 */
 	protected Player player;
+	/**
+	 * Game levels
+	 */
 	protected Collection<GameLevel> levels;
+	/**
+	 * Game Zones
+	 */
 	protected Collection<GameZone> zones;
 
 	private Logger logger = LoggerFactory.getLogger(AbstractGame.class);
 
+	/**
+	 * Player service which is used to perform crud operations
+	 */
 	@Autowired
 	protected PlayerService playerService;
 
@@ -75,6 +93,10 @@ public abstract class AbstractGame implements Game {
 		return GameUtils.createZones();
 	}
 
+	/**
+	 * This method handles fighting algorithm and child classes can override if
+	 * required
+	 */
 	@Override
 	public void takeFight() {
 		Scanner in = new Scanner(System.in);
@@ -103,6 +125,7 @@ public abstract class AbstractGame implements Game {
 											"\t> #### You have taken too much damage, Drink health bottle ! ###");
 									break innerloop;
 								}
+								break;
 							case USE_BOTTLE:
 								player.customBottles();
 								break;
@@ -180,6 +203,11 @@ public abstract class AbstractGame implements Game {
 		System.out.println("\t4. Save & Exit fighting");
 	}
 
+	/**
+	 * This method handles starting the new game logic. Deletes all history and
+	 * start a fresh one
+	 * 
+	 */
 	@Override
 	public void startNewGame() {
 		try {
@@ -190,6 +218,9 @@ public abstract class AbstractGame implements Game {
 		}
 	}
 
+	/**
+	 * This method allows to save state of player to db
+	 */
 	@Override
 	public boolean saveGame() {
 		try {
@@ -201,6 +232,9 @@ public abstract class AbstractGame implements Game {
 		}
 	}
 
+	/**
+	 * This method helps to load the saved state of player from db
+	 */
 	@Override
 	public boolean loadGame() {
 
@@ -222,6 +256,10 @@ public abstract class AbstractGame implements Game {
 		return false;
 	}
 
+	/**
+	 * This method shows the zones options for selecting for specific game
+	 */
+	@Override
 	public void loadZoneOptions() {
 
 		GameUtils.delimiter();
@@ -235,14 +273,16 @@ public abstract class AbstractGame implements Game {
 		System.out.println("Select Zone option to explore");
 	}
 
-	
+	/**
+	 * This method handles explore logic . It runs in while loop until player is alive
+	 */
 	@Override
 	public void explore() {
 		Scanner in = new Scanner(System.in);
 		try {
 			loop: while (player.isAlive()) {
-				loadZoneOptions();
 				recommendTheZone();
+				loadZoneOptions();
 				String zoneOption = in.nextLine();
 				switch (zoneOption) {
 
@@ -277,13 +317,17 @@ public abstract class AbstractGame implements Game {
 		}
 	}
 
-	protected abstract void recommendTheZone();
-
 	private void exploreStatus(String zoneName) {
 		player.addZone(zoneName);
 		player.addItem(GameZone.spawnRandomItem());
 		System.out.println(" # Hurray !! You have got item in your basket in zone :" + zoneName + ". #");
 		player.loadStatus();
 	}
+
+	/**
+	 * This method handles recommendations for zones or guide the player to take
+	 * direction and must be handled by child classes extending this abstract class
+	 */
+	protected abstract void recommendTheZone();
 
 }

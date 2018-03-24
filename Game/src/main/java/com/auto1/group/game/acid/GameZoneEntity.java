@@ -17,7 +17,11 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 /**
+ * This class is JPA Entity representation to Db
+ * 
  * @author yelsa03
  *
  */
@@ -25,9 +29,6 @@ import javax.validation.constraints.Size;
 @Table(name = "GameZone")
 public class GameZoneEntity implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -8117662134488424947L;
 
 	@Id
@@ -78,4 +79,35 @@ public class GameZoneEntity implements Serializable {
 		this.visitedCount = visitedCount;
 	}
 
+	@Override
+	public String toString() {
+		return new ToStringBuilder(this).toString();
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((zoneName == null) ? 0 : zoneName.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		GameZoneEntity other = (GameZoneEntity) obj;
+		if (zoneName == null) {
+			if (other.zoneName != null)
+				return false;
+		} else if (!zoneName.equals(other.zoneName))
+			return false;
+		return true;
+	}
+
+	
 }

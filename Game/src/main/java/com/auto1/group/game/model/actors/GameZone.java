@@ -6,7 +6,8 @@ package com.auto1.group.game.model.actors;
 import com.auto1.group.game.util.GameUtils;
 
 /**
- * @author yelsa03
+ * This class holds Game zones to explore and can be created by Game
+ * implementations
  *
  */
 public class GameZone {
@@ -17,11 +18,14 @@ public class GameZone {
 		return ITEMS[GameUtils.rand.nextInt(ITEMS.length)];
 	}
 
+	/**
+	 * Zone name
+	 */
 	private String zoneName;
+	/**
+	 * No of time the zone is visited and can be used in recommendations
+	 */
 	private Integer visitedCount = 0; // used for self learning/re-commondation
-
-	public GameZone() {
-	}
 
 	public String getZoneName() {
 		return zoneName;
