@@ -10,9 +10,18 @@ import java.util.List;
  *
  */
 public class GameLevel {
-
+	/**
+	 * level number
+	 */
 	private Integer levelNumber;
+	/**
+	 * no of kills pertaining to each level
+	 */
 	private Integer no_of_kills;
+	/**
+	 * No of enemies occurs at each level . Killing these enemies at each level
+	 * will be proceeding to next level
+	 */
 	private List<Enemy> enemies;
 
 	public Integer getLevelNumber() {

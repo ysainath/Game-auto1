@@ -162,6 +162,8 @@ public class GameHelper {
 					game.loadGame();
 					initGame(in, game);
 					break;
+				case "3":// exit
+					break;
 				default:
 					System.out.println("Invalid command");
 					continue;

@@ -7,8 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import com.auto1.group.game.acid.GameZoneEntity;
-import com.auto1.group.game.acid.ItemEntity;
 import com.auto1.group.game.acid.PlayerEntity;
 import com.auto1.group.game.model.actors.Enemy;
 import com.auto1.group.game.model.actors.GameLevel;
@@ -69,12 +67,13 @@ public class GameUtils {
 	public static List<GameZone> createZones() {
 
 		List<GameZone> zones = new ArrayList<>();
-		for (String zoneName : staticZones) {
+
+		staticZones.parallelStream().forEach((zoneName) -> {
 			GameZone gameZone = new GameZone();
 			gameZone.setZoneName(zoneName);
 			gameZone.setVisitedCount(0); // initial visited is zero
 			zones.add(gameZone);
-		}
+		});
 		return zones;
 	}
 
@@ -93,13 +92,15 @@ public class GameUtils {
 		player.setGameName(entity.getGameName());
 		player.setHealth(entity.getHealth());
 		player.setHealthBottles(entity.getHealthBottles());
-		for (ItemEntity itemEntity : entity.getItems()) {
-			player.addItem(itemEntity.getItemName(), itemEntity.getItemCount());
-		}
 
-		for (GameZoneEntity gameZoneEntity : entity.getGameZones()) {
+		entity.getItems().parallelStream().forEach((itemEntity) -> {
+			player.addItem(itemEntity.getItemName(), itemEntity.getItemCount());
+		});
+
+		entity.getGameZones().parallelStream().forEach((gameZoneEntity) -> {
 			player.addZone(gameZoneEntity.getZoneName(), gameZoneEntity.getVisitedCount());
-		}
+		});
+
 		player.setName(entity.getName());
 		player.setScore(entity.getScore());
 		return player;
@@ -122,33 +123,34 @@ public class GameUtils {
 		playerEntity.setHealthBottles(player.getHealthBottles());
 		if (player.getItems() != null) {
 			if (oldEntity != null) {
-				for (ItemEntity entity : oldEntity.getItems()) {
+				oldEntity.getItems().parallelStream().forEach((entity) -> {
 					entity.setPlayerEntity(playerEntity);
 					entity.setItemCount(player.getItems().get(entity.getItemName()));
-				}
+
+				});
 				playerEntity.setItems(oldEntity.getItems());
 			} else {
-				for (String itemName : player.getItems().keySet()) {
-					playerEntity.addItemEntity(itemName, player.getItems().get(itemName), playerEntity);
-				}
+				iterateItems(player, playerEntity);
 			}
+
 		}
 
-		if (player.getZones() != null) {
+		if (player.getZones() != null)
+
+		{
 			if (oldEntity != null && !oldEntity.getGameZones().isEmpty()) {
-				for (GameZoneEntity entity : oldEntity.getGameZones()) {
+
+				oldEntity.getGameZones().parallelStream().forEach((entity) -> {
 					entity.setPlayerEntity(playerEntity);
 					entity.setVisitedCount(player.getZones().get(entity.getZoneName()));
-				}
-				for (String zoneName : player.getZones().keySet()) {
-					playerEntity.addZoneEntity(zoneName, player.getZones().get(zoneName), playerEntity);
-				}
+				});
+
+				iterateZones(player, playerEntity);
 
 				playerEntity.setGameZones(oldEntity.getGameZones());
 			} else {
-				for (String zoneName : player.getZones().keySet()) {
-					playerEntity.addZoneEntity(zoneName, player.getZones().get(zoneName), playerEntity);
-				}
+				iterateZones(player, playerEntity);
+
 			}
 		}
 
@@ -156,5 +158,25 @@ public class GameUtils {
 		playerEntity.setPassword(player.getPassword());
 		playerEntity.setScore(player.getScore());
 		return playerEntity;
+	}
+
+	/**
+	 * @param player
+	 * @param playerEntity
+	 */
+	private static void iterateItems(Player player, PlayerEntity playerEntity) {
+		player.getItems().entrySet().stream().forEach(e -> {
+			playerEntity.addItemEntity(e.getKey(), e.getValue(), playerEntity);
+		});
+	}
+
+	/**
+	 * @param player
+	 * @param playerEntity
+	 */
+	private static void iterateZones(Player player, PlayerEntity playerEntity) {
+		player.getZones().entrySet().stream().forEach(e -> {
+			playerEntity.addZoneEntity(e.getKey(), e.getValue(), playerEntity);
+		});
 	}
 }

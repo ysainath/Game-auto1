@@ -67,6 +67,7 @@ public interface Game {
 		GameUtils.delimiter();
 		System.out.println("1.Start a new Game");
 		System.out.println("2.Load Saved Game");
+		System.out.println("3.Exit");
 		GameUtils.delimiter();
 		System.out.println("Select Game option to proceed");
 	}
