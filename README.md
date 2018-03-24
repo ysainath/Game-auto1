@@ -40,7 +40,7 @@ mvn spring-boot:run
 * [Spring boot - 1.5.10 RELEASE](https://docs.spring.io/spring-boot/docs/) - The Spring Boot framework
 * [Maven](https://maven.apache.org/) - Dependency Management 
 * [MySql](https://dev.mysql.com/doc/) - Database
-* poject tags https://github.com/ysainath/Game-auto1/tree/master/Game
+* project tags https://github.com/ysainath/Game-auto1/tree/master/Game
 
 ## Authors
 
