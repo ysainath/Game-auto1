@@ -1,5 +1,7 @@
 # Project Title
 
+Game repo link : https://github.com/ysainath/Game-auto1/tree/master/Game
+
 This project is sample command line based application which allows users to play multiple games.
 User can create a character or sign in with already registered character.
 User can take a fighting challenge and explore the game to collect the items.
@@ -13,7 +15,6 @@ User can take a fighting challenge and explore the game to collect the items.
 ## Getting Started
 
 Checkout this project to your local repo and build the application
-
 
 ### To Run the application from command line
  
@@ -39,7 +40,7 @@ mvn spring-boot:run
 * [Spring boot - 1.5.10 RELEASE](https://docs.spring.io/spring-boot/docs/) - The Spring Boot framework
 * [Maven](https://maven.apache.org/) - Dependency Management 
 * [MySql](https://dev.mysql.com/doc/) - Database
-* poject tags https://github.com/ysainath/Game-auto1/
+* poject tags https://github.com/ysainath/Game-auto1/tree/master/Game
 
 ## Authors
 
