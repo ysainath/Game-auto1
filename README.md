@@ -1,66 +1,44 @@
 # Project Title
 
-This project is sample command line based application which allows to play multiple games
+This project is sample command line based application which allows to play multiple games.
+User can take a fighting challenge and explore the game to collect the items.
+
 
 ## Getting Started
 
 Checkout this project to your local repo and build the application
 
-### To Build the application
+### To Build the application from command line
  
-mvn clean install
+mvn clean package
 
 ### Prerequisites
 
 1. Eclipse IDE with java 8 compatible
 2. MySql installed in your local
+3. Maven
 
-### Installing
+### Installing and Running
 
-1. Import
+1. Import code into local eclipse
+2. Run GameApplication.java 
 
-```
-Give the example
-```
+### Demo 
 
-And repeat
+Welcome to Multi Player Game
 
-```
-until finished
-```
+Select below options to proceed.
+1.Create a character.
+2.Do you already know your registered Character details?
 
-End with an example of getting some data out of the system or using it for a little demo
-
-## Running the tests
-
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-## Deployment
-
-Add additional notes about how to deploy this on a live system
+...........
 
 ## Built With
 
-* [Spring boot - 1.5.10 RELEASE](https://docs.spring.io/spring-boot/docs/) - The Spring Boot web framework
-* [Maven](https://maven.apache.org/) - Dependency Management
-
-(https://github.com/your/project/tags). 
+* [Spring boot - 1.5.10 RELEASE](https://docs.spring.io/spring-boot/docs/) - The Spring Boot framework
+* [Maven](https://maven.apache.org/) - Dependency Management 
+* [MySql](https://dev.mysql.com/doc/) - Database
+* poject tags https://github.com/ysainath/Game-auto1/
 
 ## Authors
 
