@@ -2,7 +2,7 @@
 
 Game repo link : https://github.com/ysainath/Game-auto1/tree/master/Game
 
-This project is sample command line based application which allows users to play multiple games.
+This project is command line based application which allows users to play multiple games.
 User can create a character or sign in with already registered character.
 User can take a fighting challenge and explore the game to collect the items.
 
