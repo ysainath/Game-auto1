@@ -21,6 +21,11 @@ import com.auto1.group.game.model.actors.Player;
  */
 public class GameUtils {
 
+	public static final String OPTION_5 = "5";
+	public static final String OPTION_4 = "4";
+	public static final String OPTION_3 = "3";
+	public static final String OPTION_2 = "2";
+	public static final String OPTION_1 = "1";
 	public static final String AVATAR = "Avatar";
 	public static final String HARRY_POTTER = "Harry Potter";
 	public static final Integer MAX_LEVEL = 3;
@@ -137,10 +142,10 @@ public class GameUtils {
 
 		if (player.getZones() != null) {
 			if (oldEntity != null && !oldEntity.getGameZones().isEmpty()) {
-				for (GameZoneEntity entity : oldEntity.getGameZones()) {
+				/*for (GameZoneEntity entity : oldEntity.getGameZones()) {
 					entity.setPlayerEntity(playerEntity);
 					entity.setVisitedCount(player.getZones().get(entity.getZoneName()));
-				}
+				}*/
 				for (String zoneName : player.getZones().keySet()) {
 					playerEntity.addZoneEntity(zoneName, player.getZones().get(zoneName), playerEntity);
 				}

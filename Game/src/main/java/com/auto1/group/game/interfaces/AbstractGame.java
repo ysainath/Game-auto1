@@ -3,6 +3,12 @@
  */
 package com.auto1.group.game.interfaces;
 
+import static com.auto1.group.game.util.GameUtils.OPTION_1;
+import static com.auto1.group.game.util.GameUtils.OPTION_2;
+import static com.auto1.group.game.util.GameUtils.OPTION_3;
+import static com.auto1.group.game.util.GameUtils.OPTION_4;
+import static com.auto1.group.game.util.GameUtils.OPTION_5;
+
 import java.util.Collection;
 import java.util.List;
 import java.util.Scanner;
@@ -121,8 +127,7 @@ public abstract class AbstractGame implements Game {
 								player.attack(enemy);
 								enemy.attack(player);
 								if (player.isDying()) {
-									System.out.println(
-											"\t> #### You have taken too much damage, Drink health bottle ! ###");
+									System.out.println("\t> #### You have taken too much damage ! ###");
 									break innerloop;
 								}
 								break;
@@ -150,15 +155,15 @@ public abstract class AbstractGame implements Game {
 						System.out.println("2. Drink health bottle");
 						System.out.println("3. Save and Exit Fighting");
 						String input = in.nextLine();
-						while (!input.equals("1") && !input.equals("2") && !input.equals("3")) {
+						while (!input.equals(OPTION_1) && !input.equals(OPTION_2) && !input.equals(OPTION_3)) {
 							System.out.println("Invalid command!");
 							input = in.nextLine();
 						}
-						if (input.equals("1")) {
+						if (input.equals(OPTION_1)) {
 							System.out.println("Continue on your fighting enemies!");
-						} else if (input.equals("2")) {
+						} else if (input.equals(OPTION_2)) {
 							player.customBottles();
-						} else if (input.equals("3")) {
+						} else if (input.equals(OPTION_3)) {
 							saveAndExitFighting();
 							break outerloop;
 						}
@@ -174,7 +179,8 @@ public abstract class AbstractGame implements Game {
 				}
 			}
 			if (!player.isAlive()) {
-				System.out.println("Player is Dead due to no health remaining.");
+				System.out.println("### Player is Dead due to no health remaining. ###");
+				System.out.println("### Game Over !!!  ###");
 				System.exit(0);
 			}
 		} catch (Exception e) {
@@ -212,6 +218,7 @@ public abstract class AbstractGame implements Game {
 	public void startNewGame() {
 		try {
 			playerService.delete(player);
+			logger.info("Deleted player from repo :{}", player);
 		} catch (Exception e) {
 			logger.error("Exception in deleting the player :{}", player);
 			throw e;
@@ -225,6 +232,7 @@ public abstract class AbstractGame implements Game {
 	public boolean saveGame() {
 		try {
 			playerService.save(player);
+			logger.info("Saved player to repo :{}", player);
 			return true;
 		} catch (Exception e) {
 			logger.error("Exception in saving the player status:{}", player);
@@ -242,7 +250,7 @@ public abstract class AbstractGame implements Game {
 			Player loadedPlayer = playerService.findByPlayerAndGameName(player);
 			if (loadedPlayer != null) {
 				this.player = loadedPlayer;
-				System.out.println("Player details loaded: " + player.getName());
+				System.out.println("### Your details successfully loaded. ###");
 				player.loadStatus();
 				logger.debug("Player details found for player :{}", player);
 				return true;
@@ -274,7 +282,8 @@ public abstract class AbstractGame implements Game {
 	}
 
 	/**
-	 * This method handles explore logic . It runs in while loop until player is alive
+	 * This method handles explore logic . It runs in while loop until player is
+	 * alive
 	 */
 	@Override
 	public void explore() {
@@ -286,19 +295,19 @@ public abstract class AbstractGame implements Game {
 				String zoneOption = in.nextLine();
 				switch (zoneOption) {
 
-				case "1":
+				case OPTION_1:
 					exploreStatus("North");
 					break;
-				case "2":
+				case OPTION_2:
 					exploreStatus("South");
 					break;
-				case "3":
+				case OPTION_3:
 					exploreStatus("East");
 					break;
-				case "4":
+				case OPTION_4:
 					exploreStatus("West");
 					break;
-				case "5":
+				case OPTION_5:
 					saveGame();
 					break loop;
 
@@ -326,7 +335,8 @@ public abstract class AbstractGame implements Game {
 
 	/**
 	 * This method handles recommendations for zones or guide the player to take
-	 * direction and must be handled by child classes extending this abstract class
+	 * direction and must be handled by child classes extending this abstract
+	 * class
 	 */
 	protected abstract void recommendTheZone();
 

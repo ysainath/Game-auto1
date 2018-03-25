@@ -3,9 +3,15 @@
  */
 package com.auto1.group.game.service;
 
+import static com.auto1.group.game.util.GameUtils.OPTION_1;
+import static com.auto1.group.game.util.GameUtils.OPTION_2;
+import static com.auto1.group.game.util.GameUtils.OPTION_3;
+
 import java.util.Scanner;
 
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,6 +38,16 @@ public class GameHelper {
 	@Autowired
 	private ValidationService validationService;
 
+	public void setGameFactory(GameFactory gameFactory) {
+		this.gameFactory = gameFactory;
+	}
+
+	public void setValidationService(ValidationService validationService) {
+		this.validationService = validationService;
+	}
+
+	private Logger logger = LoggerFactory.getLogger(GameHelper.class);
+
 	/**
 	 * authenticates if player is allowed
 	 * 
@@ -50,44 +66,50 @@ public class GameHelper {
 	 * @return
 	 */
 	public boolean validateUniqueness(Player player) {
-		System.out.println("### Verifiying uniqueness of your character name...###");
+		System.out.println("### Verifying uniqueness of your character name...###");
 		return validationService.verifyNameAlreadyRegistered(player);
 	}
 
 	/**
 	 * Entry point of game and runs continuously unless the player dies
+	 * 
 	 */
 	public void run() {
 		try (final Scanner in = new Scanner(System.in)) {
 			System.out.println("#####  Welcome to Multi Player Game ##########");
-			while (true) {
-				try {
+			try {
+				loop: while (true) {
 					System.out.println("\n\nSelect below options to proceed.");
 					System.out.println("1.Create a character.");
 					System.out.println("2.Do you already know your registered Character details?");
-
+					System.out.println("3.Exit");
 					String characterOption = in.nextLine();
 					switch (characterOption) {
-					case "1":
-						playGame(true);
+					case OPTION_1:
+						if (playGame(true))
+							return;
 						break;
-					case "2":
-						playGame(false);
+					case OPTION_2:
+						if (playGame(false))
+							return;
 						break;
+					case OPTION_3:
+						break loop;
 					default:
 						System.out.println("Invalid command");
 						continue;
 					}
-				} catch (Exception e) {
-					GameExceptionHandler.handleException(e);
 				}
+			} catch (Exception e) {
+				GameExceptionHandler.handleException(e);
 			}
 		}
+
 	}
 
-	private void playGame(boolean newProfile) {
+	private boolean playGame(boolean newProfile) {
 		try (final Scanner in = new Scanner(System.in)) {
-			loop :while (true) {
+			loop: while (true) {
 				String playerName = null, password = null;
 				boolean isNotEmpty = false;
 				while (!isNotEmpty) {
@@ -109,19 +131,21 @@ public class GameHelper {
 				System.out.println("1.Avatar");
 				System.out.println("2.Harry Potter");
 				System.out.println("3.Exit");
-
 				String gameChoice = in.nextLine();
+				logger.info("Player :{} selected game choice :{}", player, gameChoice);
 				switch (gameChoice) {
-				case "1":
+				case OPTION_1:
 					player.setGameName(GameUtils.AVATAR);
-					registerGame(newProfile, player);
+					if (registerGame(newProfile, player))
+						return true;
 					break;
-				case "2":
+				case OPTION_2:
 					player.setGameName(GameUtils.HARRY_POTTER);
-					registerGame(newProfile, player);
+					if (registerGame(newProfile, player))
+						return true;
 					break;
-				case "3":
-					break;
+				case OPTION_3:
+					break loop;
 				default:
 					System.out.println("Invalid command");
 					continue;
@@ -129,45 +153,44 @@ public class GameHelper {
 
 			}
 		}
+		return true;
 	}
 
-	private void registerGame(boolean newProfile, final Player player) {
+	private boolean registerGame(boolean newProfile, final Player player) {
 		Game game = gameFactory.getGame(player);
 		boolean isValid;
 		if (!newProfile) {
 			isValid = this.authenticate(player);
 			if (!isValid) {
 				System.out.println("Invalid details found for this character name !!.");
-				return;
+				return false;
 			}
 		} else {
 			isValid = this.validateUniqueness(player);
 			if (!isValid) {
 				System.out.println("Character already exists .Enter different character name !!!");
-				return;
+				return false;
 			}
 		}
-		try (final Scanner in = new Scanner(System.in)) {
-			while (true) {
-				game.loadGameOptions();
-				String initGameChoice = in.nextLine();
-				switch (initGameChoice) {
-				case "1":// start a new game
-				{
-					game.startNewGame();
-					initGame(in, game);
-					break;
-				}
-				case "2":// load saved game
-					game.loadGame();
-					initGame(in, game);
-					break;
-				case "3":// exit
-					break;
-				default:
-					System.out.println("Invalid command");
-					continue;
-				}
+		final Scanner in = new Scanner(System.in);
+		loop: while (true) {
+			game.loadGameOptions();
+			String initGameChoice = in.nextLine();
+			logger.info("Player selected choice :{}", initGameChoice);
+			switch (initGameChoice) {
+			case OPTION_1:// start a new game
+				game.startNewGame();
+				initGame(in, game);
+				break;
+			case OPTION_2:// load saved game
+				game.loadGame();
+				initGame(in, game);
+				break;
+			case OPTION_3:// exit
+				return true;
+			default:
+				System.out.println("Invalid command");
+				continue;
 			}
 		}
 
@@ -180,13 +203,14 @@ public class GameHelper {
 				game.loadPlayerActivitiesOptions();
 				String activityOption = in.nextLine();
 				switch (activityOption) {
-				case "1": // explore
+				case OPTION_1: // explore
 					game.explore();
 					break;
-				case "2": // take fight
+				case OPTION_2: // take fight
 					game.takeFight();
 					break;
-				case "3":// save & exit
+				case OPTION_3:// save & exit
+					// System.exit(0);
 					break loop;
 				default:
 					System.out.println("Invalid command");
@@ -201,4 +225,5 @@ public class GameHelper {
 			throw e;
 		}
 	}
+
 }

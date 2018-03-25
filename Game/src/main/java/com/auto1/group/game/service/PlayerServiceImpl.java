@@ -3,9 +3,6 @@
  */
 package com.auto1.group.game.service;
 
-import java.util.ArrayList;
-import java.util.Objects;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;

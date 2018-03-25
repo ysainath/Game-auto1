@@ -18,6 +18,10 @@ public class ValidationService {
 
 	@Autowired
 	private PlayerService playerService;
+	
+	public void setPlayerService(PlayerService playerService) {
+		this.playerService = playerService;
+	}
 
 	/**
 	 * verifies character is unique or not
@@ -46,5 +50,5 @@ public class ValidationService {
 		}
 		return false;
 	}
-
+	
 }
