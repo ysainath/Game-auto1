@@ -62,10 +62,10 @@ public class PlayerServiceImpl implements PlayerService {
 
 			PlayerEntity playerEntity = findPlayerEntity(p);
 			if (playerEntity == null) {
-				playerRepo.save(GameUtils.transformToPlayerEntity(p, null));
+				playerRepo.save(GameUtils.transformToPlayerEntity(p));
 			} else {
 				p.setPlayerId(playerEntity.getId());
-				playerRepo.save(GameUtils.transformToPlayerEntity(p, playerEntity));
+				playerRepo.save(GameUtils.transformToPlayerEntity(p));
 			}
 
 		}

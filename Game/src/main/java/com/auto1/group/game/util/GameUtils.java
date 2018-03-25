@@ -115,10 +115,9 @@ public class GameUtils {
 	 * transforms player to player entity
 	 * 
 	 * @param player
-	 * @param oldEntity
 	 * @return
 	 */
-	public static PlayerEntity transformToPlayerEntity(Player player, PlayerEntity oldEntity) {
+	public static PlayerEntity transformToPlayerEntity(Player player) {
 
 		PlayerEntity playerEntity = new PlayerEntity();
 		playerEntity.setId(player.getPlayerId());
@@ -127,28 +126,14 @@ public class GameUtils {
 		playerEntity.setHealth(player.getHealth());
 		playerEntity.setHealthBottles(player.getHealthBottles());
 		if (player.getItems() != null) {
-			if (oldEntity != null) {
-				for (ItemEntity entity : oldEntity.getItems()) {
-					entity.setPlayerEntity(playerEntity);
-					entity.setItemCount(player.getItems().get(entity.getItemName()));
-				}
-				playerEntity.setItems(oldEntity.getItems());
-			} else {
-				for (String itemName : player.getItems().keySet()) {
-					playerEntity.addItemEntity(itemName, player.getItems().get(itemName), playerEntity);
-				}
+			for (String itemName : player.getItems().keySet()) {
+				playerEntity.addItemEntity(itemName, player.getItems().get(itemName), playerEntity);
 			}
 		}
 
 		if (player.getZones() != null) {
-			if (oldEntity != null && !oldEntity.getGameZones().isEmpty()) {
-				for (String zoneName : player.getZones().keySet()) {
-					playerEntity.addZoneEntity(zoneName, player.getZones().get(zoneName), playerEntity);
-				}
-			} else {
-				for (String zoneName : player.getZones().keySet()) {
-					playerEntity.addZoneEntity(zoneName, player.getZones().get(zoneName), playerEntity);
-				}
+			for (String zoneName : player.getZones().keySet()) {
+				playerEntity.addZoneEntity(zoneName, player.getZones().get(zoneName), playerEntity);
 			}
 		}
 

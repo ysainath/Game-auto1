@@ -61,7 +61,7 @@ public class ValidationServiceTest {
 		player.setName(playerName);
 		player.setGameName(gameName);
 		player.setPassword("sainath");
-		PlayerEntity playerEntity = GameUtils.transformToPlayerEntity(player, null);
+		PlayerEntity playerEntity = GameUtils.transformToPlayerEntity(player);
 
 		when(playerRepository.findOne(Mockito.any(Example.class))).thenReturn(playerEntity);
 		validationService.setPlayerService(playerService);

@@ -67,7 +67,7 @@ public class PlayerServiceImplTest {
 		player.setName(playerName);
 		player.setGameName(gameName);
 
-		PlayerEntity playerEntity = GameUtils.transformToPlayerEntity(player, null);
+		PlayerEntity playerEntity = GameUtils.transformToPlayerEntity(player);
 
 		playerService.save(player);
 
