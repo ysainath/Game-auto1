@@ -41,8 +41,9 @@ Junits for Services,Factory and repository classes are present
 
   Select below options to proceed.
   
-   1.Create a character.
-   2.Do you already know your registered Character details?
+   * 1.Create a character.
+   * 2.Do you already know your registered Character details?
+   * 3.Exit
 
   ...........
 
