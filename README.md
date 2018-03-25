@@ -23,7 +23,12 @@ mvn spring-boot:run
 ### To Run the application from eclipse
 
 1. Import code into local eclipse
-2. Run GameApplication.java 
+2. Run GameApplication.java
+
+This application can also run H2 In-Memory database but it needs change in below file.
+* Mysql datasource properties has to be removed and make use of h2 database config
+
+https://github.com/ysainath/Game-auto1/blob/master/Game/src/main/resources/application.properties
 
 ### Integration tests
 
