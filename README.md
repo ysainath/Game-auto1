@@ -25,6 +25,12 @@ mvn spring-boot:run
 1. Import code into local eclipse
 2. Run GameApplication.java 
 
+### Integration tests
+
+Built with [System Rules] (http://stefanbirkner.github.io/system-rules/#TextFromStandardInputStream) library for STD inputs
+
+This is the link for code : 
+
 ### Demo 
 
    #### Welcome to Multi Player Game ###
