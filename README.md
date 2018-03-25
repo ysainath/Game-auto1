@@ -29,7 +29,11 @@ mvn spring-boot:run
 
 Built with [System Rules] (http://stefanbirkner.github.io/system-rules/#TextFromStandardInputStream) library for STD inputs
 
-This is the link for code : 
+This is the link for Java class : https://github.com/ysainath/Game-auto1/blob/master/Game/src/test/java/com/auto1/group/game/service/GameHelperTest.java
+
+### Unit tests
+
+Junits for Services,Factory and repository classes are present
 
 ### Demo 
 
