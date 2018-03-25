@@ -33,7 +33,7 @@ This is the link for Java class : https://github.com/ysainath/Game-auto1/blob/ma
 
 ### Unit tests
 
-Junits for Services,Factory and repository classes are present
+SpringRunner Junits are written for Services,Factory and repository classes .
 
 ### Demo 
 
