@@ -13,7 +13,6 @@ public class GameExceptionHandler {
 	 * Handle exception generically . Either write to file or print on console
 	 * 
 	 * @param e
-	 * @throws Throwable
 	 */
 	public static void handleException(Throwable e) {
 		e.printStackTrace();
