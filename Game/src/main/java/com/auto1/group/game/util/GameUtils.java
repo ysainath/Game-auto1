@@ -142,14 +142,9 @@ public class GameUtils {
 
 		if (player.getZones() != null) {
 			if (oldEntity != null && !oldEntity.getGameZones().isEmpty()) {
-				/*for (GameZoneEntity entity : oldEntity.getGameZones()) {
-					entity.setPlayerEntity(playerEntity);
-					entity.setVisitedCount(player.getZones().get(entity.getZoneName()));
-				}*/
 				for (String zoneName : player.getZones().keySet()) {
 					playerEntity.addZoneEntity(zoneName, player.getZones().get(zoneName), playerEntity);
 				}
-
 			} else {
 				for (String zoneName : player.getZones().keySet()) {
 					playerEntity.addZoneEntity(zoneName, player.getZones().get(zoneName), playerEntity);
